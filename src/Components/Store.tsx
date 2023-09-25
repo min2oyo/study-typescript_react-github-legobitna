@@ -1,7 +1,12 @@
-import { Restaurant, ChangeAddress } from "../model/restaurant";
+import { RestaurantType, AddressToVoidType } from "../model/types";
 
-const Store = ({ name, category, address, menu, changeAddress }: Restaurant & { changeAddress: ChangeAddress; }) => {
+interface Props {
+  restaurant: RestaurantType;
+  changeAddress: AddressToVoidType;
+}
 
+const Store = ({ restaurant, changeAddress }: Props) => {
+  const { name, category, address, menu } = restaurant;
   return (
     <div>Store</div>
   );
