@@ -1,26 +1,55 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { useState } from 'react';
 
-function App() {
+import axios from 'axios';
+
+import Store from './Components/Store';
+import { ChangeAddress } from './model/restaurant';
+
+import './App.css';
+import BestMenu from './Components/BestMenu';
+
+const init = {
+  name: ``,
+  category: ``,
+  address: {
+    city: ``,
+    detail: ``,
+    zipCode: 0
+  },
+  menu: [],
+};
+
+const bestMenuInit = {
+  name: ``,
+  category: ``,
+  price: 0
+};
+
+const App = () => {
+
+  const [restaurant, setRestaurant] = useState(init);
+  const { name, category, address, menu } = restaurant;
+  const [bestMenu, setBestMenu] = useState(bestMenuInit);
+
+  const changeAddress: ChangeAddress = address => {
+    setRestaurant({ ...restaurant, address: address });
+  };
+
+  useState(() => {
+    Promise.all([axios(`/data/restaurant.json`), axios(`/data/best-ment.json`)])
+      .then(res => {
+        console.log(res[0].data);
+        console.log(res[1].data);
+        // setRestaurant(res[0].data);
+        // setRestaurant(res[1].data);
+      });
+  });
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Store name={name} category={category} address={address} menu={menu} changeAddress={changeAddress} />
+      <BestMenu />
     </div>
   );
-}
+};
 
 export default App;
