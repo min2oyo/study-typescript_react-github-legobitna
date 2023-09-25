@@ -7,8 +7,6 @@ import BestMenu from './Components/BestMenu';
 import { bestMenuState, restaurantState } from './model/states';
 import { AddressToVoidType, StringToStringType } from './model/types';
 
-import './App.css';
-
 const App = () => {
 
   const [restaurant, setRestaurant] = useState(restaurantState);
