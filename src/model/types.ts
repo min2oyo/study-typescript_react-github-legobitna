@@ -25,6 +25,5 @@ export type ApiResponse<T> = {
   totalPage: number;
   page: number;
 };
-
 export type RestaurantResponse = ApiResponse<RestaurantType>;
 export type MenuResponse = ApiResponse<MenuType>;

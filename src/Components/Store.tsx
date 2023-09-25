@@ -6,7 +6,6 @@ interface Props {
 }
 
 const Store = ({ restaurant, changeAddress }: Props) => {
-  const { name, category, address, menu } = restaurant;
   return (
     <div>Store</div>
   );
